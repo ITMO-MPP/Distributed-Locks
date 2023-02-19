@@ -5,19 +5,19 @@
 
 ## Задача
 
-В файле [`MutexProcess.java`](src/main/java/solution/MutexProcess.java) находится описание интерфейса, 
+В файле [`MutexProcess.java`](src/solution/MutexProcess.java) находится описание интерфейса, 
 который вам предстоит реализовать. Свой код вы должны писать на языке Java или Kotlin.
 
 Реализацию на Java пишите в файлах:
-* [`ProcessCentralized.java`](src/main/java/solution/ProcessCentralized.java) &mdash; реализация 
+* [`ProcessCentralized.java`](src/solution/ProcessCentralized.java) &mdash; реализация 
 централизованного алгоритма. 
-* [`ProcessLamport.java`](src/main/java/solution/ProcessLamport.java) &mdash; реализация
+* [`ProcessLamport.java`](src/solution/ProcessLamport.java) &mdash; реализация
  алгоритма Лампорта.
-* [`ProcessRickartAgrawala.java`](src/main/java/solution/ProcessRickartAgrawala.java) &mdash; реализация
+* [`ProcessRickartAgrawala.java`](src/solution/ProcessRickartAgrawala.java) &mdash; реализация
  алгоритма Рикарта и Агравала.
-* [`ProcessToken.java`](src/main/java/solution/ProcessToken.java) &mdash; реализация
+* [`ProcessToken.java`](src/solution/ProcessToken.java) &mdash; реализация
   алгоритма на основе токена.
-* [`ProcessPhilosophers.java`](src/main/java/solution/ProcessPhilosophers.java) &mdash; реализация
+* [`ProcessPhilosophers.java`](src/solution/ProcessPhilosophers.java) &mdash; реализация
   алгоритма обедающих философов.
 
 Для решения на Kotlin откройте Java файл из списка выше и нажмите Ctrl+Alt+Shift+K (Cmd+Alt+Shift+K на MacOS) в 
@@ -29,7 +29,7 @@ Do you want to find such code and correct it too?" отвечайте "No".
 ## Окружение процесса
 
 Тестовая система будет запускать ваш код в нескольких процессах, каждому из которых выдан уникальный
-идентификатор начинающийся с единицы. Через ссылку на объект [`Environment`](src/main/java/internal/Environment.java) 
+идентификатор начинающийся с единицы. Через ссылку на объект [`Environment`](src/internal/Environment.java) 
 каждый процесс может узнать конфигурацию системы и общаться с другими процессами:
 
 * `env.getProcessId()` &mdash; возвращается идентификатор процесса (нумерация с единицы).
@@ -119,11 +119,11 @@ if (message is MyMessage) {
 ## Тестирование
 
 Тестирования реализации происходит путем запуска тестов:
-* [`ProcessCentralizedTest.java`](src/test/java/ProcessCentralizedTest.java)
-* [`ProcessLamportTest.java`](src/test/java/ProcessLamportTest.java)
-* [`ProcessRickartAgrawalaTest.java`](src/test/java/ProcessRickartAgrawalaTest.java)
-* [`ProcessTokenTest.java`](src/test/java/ProcessTokenTest.java)
-* [`ProcessPhilosophersTest.java`](src/test/java/ProcessPhilosophersTest.java)
+* [`ProcessCentralizedTest.java`](test/ProcessCentralizedTest.java)
+* [`ProcessLamportTest.java`](test/ProcessLamportTest.java)
+* [`ProcessRickartAgrawalaTest.java`](test/ProcessRickartAgrawalaTest.java)
+* [`ProcessTokenTest.java`](test/ProcessTokenTest.java)
+* [`ProcessPhilosophersTest.java`](test/ProcessPhilosophersTest.java)
 
 Из командной строки: `./gradlew test`
 

@@ -18,6 +18,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
+sourceSets.main {
+    java.setSrcDirs(listOf("src"))
+    resources.setSrcDirs(listOf("resources"))
+}
+
+sourceSets.test {
+    java.setSrcDirs(listOf("test"))
+}
+
 kotlin {
     jvmToolchain(17)
 }
