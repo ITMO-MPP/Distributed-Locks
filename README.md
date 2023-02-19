@@ -6,7 +6,9 @@
 ## Задача
 
 В файле [`MutexProcess.java`](src/main/java/solution/MutexProcess.java) находится описание интерфейса, 
-который вам предстоит реализовать. Свой код вы должны писать на языке Java в файлах 
+который вам предстоит реализовать. Свой код вы должны писать на языке Java или Kotlin.
+
+Реализацию на Java пишите в файлах:
 * [`ProcessCentralized.java`](src/main/java/solution/ProcessCentralized.java) &mdash; реализация 
 централизованного алгоритма. 
 * [`ProcessLamport.java`](src/main/java/solution/ProcessLamport.java) &mdash; реализация
@@ -17,6 +19,12 @@
   алгоритма на основе токена.
 * [`ProcessPhilosophers.java`](src/main/java/solution/ProcessPhilosophers.java) &mdash; реализация
   алгоритма обедающих философов.
+
+Для решения на Kotlin откройте Java файл из списка выше и нажмите Ctrl+Alt+Shift+K (Cmd+Alt+Shift+K на MacOS) в 
+IntelliJ IDEA для конвертации соответствующего фала из `XXX.java` в `XXX.kt`. 
+На вопрос "Some code in the rest of your project may require corrections after performing this conversion. 
+Do you want to find such code and correct it too?" отвечайте "No".
+Пишите код в соответствующем kt файле, который получится после конвертации. 
 
 ## Окружение процесса
 
@@ -45,8 +53,8 @@
   Процесс должен инициировать алгоритм
   входа в критическую секцию и, после входа в неё, вызвать метод `env.lock()`.
 
-  Вызов `env.lock()` не обязательно должен быть сделан в теле метода `onLockRequest()`: можно вызвать 
-  `env.lock()` в ходе обработки очередого сообщения, но только после того как процессу был сделан запрос 
+  Вызов `env.lock()` необязательно должен быть сделан в теле метода `onLockRequest()`: можно вызвать 
+  `env.lock()` в ходе обработки очередного сообщения, но только после того как процессу был сделан запрос 
   на вход в критическую секцию с помощью метода `onLockRequest()`.
 
   Метод `onLockRequest()` не будет повторно вызываться до выхода этого процесса из критической секции.
@@ -62,25 +70,32 @@
 * В алгоритме Лампорта гарантируется, что сообщения между каждой парой процессов доставляются
   в порядке FIFO;
 * В централизованном алгоритме предполагается, что процесс с идентификатором `1` является координатором;
-* В алгоритме на основе токена предполагается, что изначально токеном владеет процесс с идентификатором `1`;
+* В алгоритме на основе токена предполагается, что изначально токеном владеет процесс с идентификатором `1`.
 
 ## Работа с сообщениями
 
-Каждое отправленное сообщение должно быть сериализуемо. Описание класса сообщений может выглядеть, например, так:
+Каждое отправленное сообщение должно быть сериализуемо. Описание класса сообщений может выглядеть, например, так 
+на Java:
 
 ```java
-record MyMessage(int key, String value) 
-        implements java.io.Serializable {
-}
+record MyMessage(int key, String value) implements java.io.Serializable {}
+```
+
+или на Kotlin:
+
+```kotlin
+data class MyMessage(val key: Int, val value: String) : java.io.Serializable
 ```
 
 Размер каждого отправленного сообщения не должен превышать ста байт.
 
 Заметьте, что метод `onMessage(int senderPid, Object message)`в качестве аргумента принимает не описанный
-вами тип сообщения, а `java.lang.Object`. Используйте приведения типов вида 
+вами тип сообщения, а `java.lang.Object`. На Java используйте приведения типов вида:  
+
 ```java 
 MyMessage typedMessage = (MyMessage) message;
 ```
+
 и, если нужно, оператор `instanceof`
 
 ```java
@@ -90,6 +105,16 @@ if (message instanceof MyMessage) {
 ```
 
 для приведения сообщения к нужному вам типу.
+
+На Kotlin:
+
+```kotlin
+val typedMessage = message as MyMessage
+// or 
+if (message is MyMessage) { 
+    // ...
+}
+```
 
 ## Тестирование
 
